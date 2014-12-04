@@ -464,65 +464,65 @@ PHP
 	fi
 
 	# Checkout, install and configure WordPress trunk via core.svn
-	if [[ ! -d /srv/www/wordpress-trunk ]]; then
-		echo "Checking out WordPress trunk from core.svn, see http://core.svn.wordpress.org/trunk"
-		svn checkout http://core.svn.wordpress.org/trunk/ /srv/www/wordpress-trunk
-		cd /srv/www/wordpress-trunk
-		echo "Configuring WordPress trunk..."
-		wp core config --dbname=wordpress_trunk --dbuser=wp --dbpass=wp --quiet --extra-php <<PHP
-define( 'WP_DEBUG', true );
-PHP
-		wp core install --url=local.wordpress-trunk.dev --quiet --title="Local WordPress Trunk Dev" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
-	else
-		echo "Updating WordPress trunk..."
-		cd /srv/www/wordpress-trunk
-		svn up --ignore-externals
-	fi
+# 	if [[ ! -d /srv/www/wordpress-trunk ]]; then
+# 		echo "Checking out WordPress trunk from core.svn, see http://core.svn.wordpress.org/trunk"
+# 		svn checkout http://core.svn.wordpress.org/trunk/ /srv/www/wordpress-trunk
+# 		cd /srv/www/wordpress-trunk
+# 		echo "Configuring WordPress trunk..."
+# 		wp core config --dbname=wordpress_trunk --dbuser=wp --dbpass=wp --quiet --extra-php <<PHP
+# define( 'WP_DEBUG', true );
+# PHP
+# 		wp core install --url=local.wordpress-trunk.dev --quiet --title="Local WordPress Trunk Dev" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
+# 	else
+# 		echo "Updating WordPress trunk..."
+# 		cd /srv/www/wordpress-trunk
+# 		svn up --ignore-externals
+# 	fi
 
 	# Checkout, install and configure WordPress trunk via develop.svn
-	if [[ ! -d /srv/www/wordpress-develop ]]; then
-		echo "Checking out WordPress trunk from develop.svn, see http://develop.svn.wordpress.org/trunk"
-		svn checkout http://develop.svn.wordpress.org/trunk/ /srv/www/wordpress-develop
-		cd /srv/www/wordpress-develop/src/
-		echo "Configuring WordPress develop..."
-		wp core config --dbname=wordpress_develop --dbuser=wp --dbpass=wp --quiet --extra-php <<PHP
-// Allow (src|build).wordpress-develop.dev to share the same database
-if ( 'build' == basename( dirname( __FILE__) ) ) {
-	define( 'WP_HOME', 'http://build.wordpress-develop.dev' );
-	define( 'WP_SITEURL', 'http://build.wordpress-develop.dev' );
-}
+# 	if [[ ! -d /srv/www/wordpress-develop ]]; then
+# 		echo "Checking out WordPress trunk from develop.svn, see http://develop.svn.wordpress.org/trunk"
+# 		svn checkout http://develop.svn.wordpress.org/trunk/ /srv/www/wordpress-develop
+# 		cd /srv/www/wordpress-develop/src/
+# 		echo "Configuring WordPress develop..."
+# 		wp core config --dbname=wordpress_develop --dbuser=wp --dbpass=wp --quiet --extra-php <<PHP
+# // Allow (src|build).wordpress-develop.dev to share the same database
+# if ( 'build' == basename( dirname( __FILE__) ) ) {
+# 	define( 'WP_HOME', 'http://build.wordpress-develop.dev' );
+# 	define( 'WP_SITEURL', 'http://build.wordpress-develop.dev' );
+# }
 
-define( 'WP_DEBUG', true );
-PHP
-		wp core install --url=src.wordpress-develop.dev --quiet --title="WordPress Develop" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
-		cp /srv/config/wordpress-config/wp-tests-config.php /srv/www/wordpress-develop/
-		cd /srv/www/wordpress-develop/
-		npm install &>/dev/null
-	else
-		echo "Updating WordPress develop..."
-		cd /srv/www/wordpress-develop/
-		svn up
-		npm install &>/dev/null
-	fi
+# define( 'WP_DEBUG', true );
+# PHP
+# 		wp core install --url=src.wordpress-develop.dev --quiet --title="WordPress Develop" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
+# 		cp /srv/config/wordpress-config/wp-tests-config.php /srv/www/wordpress-develop/
+# 		cd /srv/www/wordpress-develop/
+# 		npm install &>/dev/null
+# 	else
+# 		echo "Updating WordPress develop..."
+# 		cd /srv/www/wordpress-develop/
+# 		svn up
+# 		npm install &>/dev/null
+# 	fi
 
-	if [[ ! -d /srv/www/wordpress-develop/build ]]; then
-		echo "Initializing grunt in WordPress develop... This may take a few moments."
-		cd /srv/www/wordpress-develop/
-		grunt
-	fi
+# 	if [[ ! -d /srv/www/wordpress-develop/build ]]; then
+# 		echo "Initializing grunt in WordPress develop... This may take a few moments."
+# 		cd /srv/www/wordpress-develop/
+# 		grunt
+# 	fi
 
-	# Download phpMyAdmin
-	if [[ ! -d /srv/www/default/database-admin ]]; then
-		echo "Downloading phpMyAdmin 4.0.10..."
-		cd /srv/www/default
-		wget -q -O phpmyadmin.tar.gz 'http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.0.10/phpMyAdmin-4.0.10-all-languages.tar.gz/download'
-		tar -xf phpmyadmin.tar.gz
-		mv phpMyAdmin-4.0.10-all-languages database-admin
-		rm phpmyadmin.tar.gz
-	else
-		echo "PHPMyAdmin already installed."
-	fi
-	cp /srv/config/phpmyadmin-config/config.inc.php /srv/www/default/database-admin/
+# 	# Download phpMyAdmin
+# 	if [[ ! -d /srv/www/default/database-admin ]]; then
+# 		echo "Downloading phpMyAdmin 4.0.10..."
+# 		cd /srv/www/default
+# 		wget -q -O phpmyadmin.tar.gz 'http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.0.10/phpMyAdmin-4.0.10-all-languages.tar.gz/download'
+# 		tar -xf phpmyadmin.tar.gz
+# 		mv phpMyAdmin-4.0.10-all-languages database-admin
+# 		rm phpmyadmin.tar.gz
+# 	else
+# 		echo "PHPMyAdmin already installed."
+# 	fi
+# 	cp /srv/config/phpmyadmin-config/config.inc.php /srv/www/default/database-admin/
 else
 	echo -e "\nNo network available, skipping network installations"
 fi
