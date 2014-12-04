@@ -1,0 +1,42 @@
+{
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://wpackagist.org"  
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wordpress",
+        "type": "webroot",
+        "version": "4.0.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/WordPress/WordPress/archive/4.0.1.zip"
+        },
+        "require" : {
+          "fancyguy/webroot-installer": "1.0.0"
+        }
+      }
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "wordpress": "4.0.1",
+    "fancyguy/webroot-installer": "1.0.0",
+    "wpackagist-plugin/advanced-custom-fields":"*",
+    "wpackagist-plugin/admin-post-navigation":"*",
+    "wpackagist-plugin/debug-bar":"*",
+    "wpackagist-plugin/google-analytics-for-wordpress":"*",
+    "wpackagist-plugin/jetpack":"*",
+    "wpackagist-plugin/regenerate-thumbnails":"*",
+    "wpackagist-plugin/show-template":"*",
+    "wpackagist-plugin/simple-page-ordering":"*",
+    "wpackagist-plugin/theme-check":"*",
+    "wpackagist-plugin/wordpress-importer":"*"
+  },
+  "extra": {
+    "webroot-dir": "_wp",
+    "webroot-package": "wordpress"
+  }
+}
