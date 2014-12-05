@@ -16,13 +16,13 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'database_name_here');
+define('DB_NAME', 'responsivewp');
 
 /** MySQL database username */
-define('DB_USER', 'username_here');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'password_here');
+define('DB_PASSWORD', 'password');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -37,7 +37,7 @@ define('DB_COLLATE', '');
 // Custom Content Directory
 // ========================
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
-define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content' );
+define( 'WP_CONTENT_URL', 'http://responsive-website.dev/wp-content' );
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -48,14 +48,14 @@ define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content' );
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'put your unique phrase here');
-define('SECURE_AUTH_KEY',  'put your unique phrase here');
-define('LOGGED_IN_KEY',    'put your unique phrase here');
-define('NONCE_KEY',        'put your unique phrase here');
-define('AUTH_SALT',        'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT',   'put your unique phrase here');
-define('NONCE_SALT',       'put your unique phrase here');
+define('AUTH_KEY',         'CBev`MB-`YLVa4@=mO6^0(@Gi(dEoMhAc tE~`/lS%MNB_|($LPPeX/d,-e`T)2H');
+define('SECURE_AUTH_KEY',  '/<1>ger.bZD7ll|<>0@-vdicm/cb[Jfq{y<T{tkP5Qo[KZ+#*^Efe2|25V3Jkg!F');
+define('LOGGED_IN_KEY',    'Pxv5)<]X>+;c+h}%+AKw2N33|y1*J3K+Q*Z`4]UA|6#bG~jWmeSUN f0I183ZW V');
+define('NONCE_KEY',        'LX,Jybc#%v0?aLQOoP[|MyPt,~j<U[9IDaCdVLi|?&,#Q&-#|Hgojy*:5PcB$FiZ');
+define('AUTH_SALT',        'adP+;^C yxHLSkXbi2|o42YP)!7U2m5~6a^]HH@y=uZ,XOAC=R+1jaBCVve$ojB/');
+define('SECURE_AUTH_SALT', '`kRJn83rv8&+zEdY0i(4:J1 tAPHIIl`]d2^gK<}f?(zQc+vX?0f| JJ.sAzd:,I');
+define('LOGGED_IN_SALT',   'A@<E@ngG-1u2.4W.QDMu`5h@^+pk|pNtj1qkO/fR*{/uYbgQDFr2FUe B{h@k/XN');
+define('NONCE_SALT',       ' 63:[4=sywCy8JE4.UpPY!kok|IjhZ-a@96hPsW^LqXFW}Bh/8#8/ !&,KS#-1w-');
 
 /**#@-*/
 
@@ -65,7 +65,7 @@ define('NONCE_SALT',       'put your unique phrase here');
  * You can have multiple installations in one database if you give each a unique
  * prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = 'wp_';
+$table_prefix  = 'resp_wp_';
 
 /**
  * For developers: WordPress debugging mode.
