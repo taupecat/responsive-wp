@@ -79,6 +79,7 @@ cd /var/www
 composer install >/dev/null 2>&1
 
 echo "Installing mysql..."
+apt-get update
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_PASS"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_PASS"
 apt-get install -y mysql-server mysql-client >/dev/null 2>&1
