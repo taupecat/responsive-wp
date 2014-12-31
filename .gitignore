@@ -3,11 +3,11 @@ _wp
 npm-debug.log
 .vagrant
 vendor
-!src/js/vendor
 .sass-cache
 
 # wp-content
 debug.log
 wp-content/plugins/*
 wp-content/themes/*
+!wp-content/themes/responsive-wp
 wp-content/uploads/*
