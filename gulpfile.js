@@ -39,7 +39,7 @@ gulp.task('styles', function() {
 	return gulp.src(sass_dir + '/*.scss')
 		.pipe(sass({
 			bundleExec: true,
-			require: 'breakpoint'
+			require: [ 'breakpoint', 'susy' ]
 		}))
 		.on( 'error', gutil.log )
 		.pipe(sourcemaps.init({loadMaps: true}))
