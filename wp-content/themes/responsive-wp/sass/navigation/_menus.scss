@@ -1,8 +1,25 @@
 .main-navigation {
+	background: {
+		color: $black;
+		image: linear-gradient( to bottom, transparentize( #fff, 0.77 ), transparentize( #000, 0.77 ) 35px, transparentize( #000, 0.77 ) 100% );
+	}
 	clear: both;
 	display: block;
 	float: left;
 	width: 100%;
+
+	.nav-menu {
+		background-color: $black;
+		display: none;
+		position: absolute;
+		width: 100%;
+	}
+
+	&.toggled {
+		.nav-menu {
+			display: block;
+		}
+	}
 
 	ul {
 		list-style: none;
@@ -11,6 +28,7 @@
 
 		ul {
 			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+			display: none;
 			float: left;
 			position: absolute;
 			top: 1.5em;
@@ -44,15 +62,33 @@
 		}
 	}
 	li {
-		float: left;
 		position: relative;
+
+		@include breakpoint( $bp-medium ) {
+			float: left;
+		}
 
 		&:hover > a {
 		}
 	}
 	a {
+		@extend %side-padding;
+		border-top: 1px solid transparentize( $white, 0.8 );
+		color: mix( #000, $white, 10% );
 		display: block;
-		text-decoration: none;
+		padding: {
+			top: 0.5rem;
+			bottom: 0.5rem;
+		}
+		text: {
+			decoration: none;
+			transform: uppercase;
+		}
+		@include font-size(1.4);
+
+		@include hover-state {
+			color: $white;
+		}
 	}
 
 	.current_page_item > a,
@@ -61,18 +97,50 @@
 	}
 }
 
-/* Small menu */
 .menu-toggle {
-	display: none;
-}
+	background: none;
+	border: none;
+	border: radius;
+	box-shadow: none;
+	color: $white;
+	height: 35px;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	text: {
+		indent: 150%;
+		shadow: none;
+	}
+	white-space: nowrap;
+	width: 100%;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	        appearance: none;
 
-@media screen and (max-width: 600px) {
-	.menu-toggle,
-	.main-navigation.toggled .nav-menu {
-		display: block;
+	&:hover {
+		box-shadow: none;
 	}
 
-	.main-navigation ul {
+	&::after {
+		@extend %side-padding;
+		content: "\f419";
+		font: {
+			family: Genericons;
+			size: rem(18px);
+		}
+		height: 100%;
+		left: 0;
+		line-height: 35px;
+		position: absolute;
+		text: {
+			align: left;
+			indent: 0;
+		}
+		top: 0;
+		width: 100%;
+	}
+
+	@include breakpoint( $bp-medium ) {
 		display: none;
 	}
 }
