@@ -62,13 +62,13 @@ gulp.task('clean', function() {
 });
 
 
-// Default: clean and styles
-gulp.task('default', ['clean'], function() {
-	gulp.start('styles');
-});
-
-
 // Watch: watch our .scss files and do things when they change
 gulp.task('watch', function() {
 	gulp.watch( sass_dir + '/**/*.scss', ['styles'] );
+});
+
+
+// Default: clean, styles & watch
+gulp.task('default', ['clean', 'styles'], function() {
+	gulp.start('watch');
 });
