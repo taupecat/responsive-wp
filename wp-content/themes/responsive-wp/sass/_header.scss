@@ -1,0 +1,52 @@
+.site-header {
+	border-top: 4px solid $black;
+	position: relative;
+
+	img {
+		display: block;
+	}
+}
+
+.site-logo {
+	height: 75px;
+	left: 50%;
+	position: absolute;
+	top: rem(5px);
+	transform: translate( -50%, 0 );
+	width: 75px;
+
+	img {
+		height: auto;
+		width: 100%;
+	}
+}
+
+.site-branding {
+	@extend %side-padding;
+	background: transparentize( #000, 0.5 );
+	bottom: 0;
+	color: $white;
+	left: 0;
+	padding: {
+		top: 1rem;
+	}
+	position: absolute;
+	right: 0;
+}
+
+.site-title {
+	font: {
+		family: $font__main;
+		weight: $font-weight__bold;
+	}
+	line-height: ( 48px / 40px );
+	@include font-size(2);
+}
+
+.site-description {
+	font: {
+		family: $font__alt;
+		style: italic;
+	}
+	line-height: ( 48px / 24px );
+}

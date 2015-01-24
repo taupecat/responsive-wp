@@ -1,0 +1,3 @@
+@function rem( $target ) {
+	@return $target / $font-size__default * 1rem;
+}

@@ -10,3 +10,9 @@ a {
 		color: $color__link-hover;
 	}
 }
+
+a.block {
+	color: currentColor;
+	display: block;
+	text-decoration: underline;
+}

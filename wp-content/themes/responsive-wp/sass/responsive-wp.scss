@@ -43,9 +43,12 @@ and Blueprint http://www.blueprintcss.org/
 12.0 Media
 	12.1 Captions
 	12.2 Galleries
+13.0 Header
 --------------------------------------------------------------*/
 @import "variables-site/variables-site";
+@import "functions/functions-master";
 @import "mixins/mixins-master";
+@import "placeholders";
 
 /*--------------------------------------------------------------
 1.0 Reset
@@ -106,3 +109,8 @@ and Blueprint http://www.blueprintcss.org/
 12.0 Media
 --------------------------------------------------------------*/
 @import "media/media";
+
+/*--------------------------------------------------------------
+13.0 Header
+--------------------------------------------------------------*/
+@import "header";
