@@ -3,7 +3,39 @@
 }
 
 .hentry {
+	@extend %side-padding;
 	margin: 0 0 1.5em;
+
+	.entry-meta {
+		background-color: $black;
+		border-radius: 500px;
+		color: $white;
+		float: left;
+		font: {
+			family: $font__alt;
+			style: italic;
+		}
+		margin-bottom: 1em;
+		padding: 4px 15px;
+		@include font-size(1.2);
+	}
+
+	.entry-title {
+		font: {
+			family: $font__alt;
+			style: italic;
+		}
+		@include font-size(2.4);
+	}
+
+	.entry-author {
+		font-family: $font__alt;
+		@include font-size(1.5);
+	}
+
+	.entry-content {
+		@include font-size(1.4);
+	}
 }
 
 .byline,

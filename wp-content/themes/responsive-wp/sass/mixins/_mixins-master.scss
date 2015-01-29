@@ -21,8 +21,8 @@
 	clear: both;
 }
 
-@mixin highlight {
-	background-color: transparentize( magenta, 0.8 );
+@mixin highlight( $hue-adjust: 0 ) {
+	background-color: transparentize( hsl( ( 300 + $hue-adjust ), 100%, 50% ), 0.8 );
 }
 
 @mixin hover-state {

@@ -43,7 +43,6 @@ and Blueprint http://www.blueprintcss.org/
 12.0 Media
 	12.1 Captions
 	12.2 Galleries
-13.0 Header
 --------------------------------------------------------------*/
 @import "variables-site/variables-site";
 @import "functions/functions-master";
@@ -112,6 +111,6 @@ and Blueprint http://www.blueprintcss.org/
 @import "media/media";
 
 /*--------------------------------------------------------------
-13.0 Header
+Custom partials
 --------------------------------------------------------------*/
 @import "header";
