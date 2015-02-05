@@ -2,12 +2,19 @@
 	@extend %side-padding;
 	background-color: $black;
 	color: $white;
+	font-weight: $font-weight__bold;
 	padding: {
 		top: 1em;
 		bottom: 1em;
 	}
+	text-transform: uppercase;
 
 	a {
 		color: $white;
+		text-decoration: none;
+
+		@include hover-state {
+			text-decoration: underline;
+		}
 	}
 }
