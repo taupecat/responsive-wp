@@ -113,4 +113,6 @@ and Blueprint http://www.blueprintcss.org/
 /*--------------------------------------------------------------
 Custom partials
 --------------------------------------------------------------*/
-@import "header";
+@import
+	"header",
+	"footer";
