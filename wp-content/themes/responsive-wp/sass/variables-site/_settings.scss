@@ -1,8 +1,19 @@
 /** Breakpoints */
-$bp-medium: 600px;
+$bp-medium: 640px;
+$bp-header: 768px;
 
 $breakpoint-to-ems: true;
 
 
 /** Hover Timing */
 $hover-timing: 100ms;
+
+
+/** Susy Grids */
+$susy: (
+	columns: 12,
+	gutters: 1/2,
+	math: fluid,
+	output: float,
+	gutter-position: after
+);

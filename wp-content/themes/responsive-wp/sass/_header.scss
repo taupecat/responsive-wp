@@ -22,16 +22,14 @@
 }
 
 .site-branding {
-	@extend %side-padding;
 	background: transparentize( #000, 0.5 );
 	bottom: 0;
 	color: $white;
 	left: 0;
-	padding: {
-		top: 1rem;
-	}
+	padding-top: 1rem;
 	position: absolute;
 	right: 0;
+	@include side-padding;
 }
 
 .site-title {

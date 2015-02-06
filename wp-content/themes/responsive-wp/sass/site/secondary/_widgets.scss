@@ -1,6 +1,10 @@
 .widget {
-	@extend %side-padding;
 	margin: 0 0 2rem;
+	@include side-padding;
+
+	@include breakpoint( $bp-medium ) {
+		padding: 0;
+	}
 
 	/* Make sure select elements fit in widgets */
 	select {
@@ -19,6 +23,12 @@
 		background-color: $gray-light;
 		border-top: 4px solid $black;
 		padding: 1.4rem 0;
+
+		@include breakpoint( $bp-medium ) {
+			background-color: transparent;
+			border-top: none;
+			padding: 0;
+		}
 
 		.widget-title {
 			border: solid $black {

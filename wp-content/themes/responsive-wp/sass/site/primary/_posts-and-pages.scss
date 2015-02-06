@@ -3,8 +3,12 @@
 }
 
 .hentry {
-	@extend %side-padding;
 	margin: 0 0 1.5em;
+	@include side-padding;
+
+	@include breakpoint( $bp-medium ) {
+		padding: 0;
+	}
 
 	.entry-meta {
 		background-color: $black;

@@ -1,52 +1,86 @@
 .paging-navigation {
-	@extend %side-padding;
+	@include side-padding;
 
-	.nav-previous a,
-	.nav-next a {
-		background-color: $black;
-		border-radius: 100%;
-		display: block;
+	@include breakpoint( $bp-medium ) {
+		padding: 0;
+	}
+
+	.nav-previous,
+	.nav-next {
 		height: 32px;
-		overflow: hidden;
-		position: relative;
-		text-indent: 150%;
-		transition: background-color $hover-timing linear;
-		white-space: nowrap;
-		width: 32px;
+		line-height: 32px;
 
-		@include hover-state {
-			background-color: mix( $white, $black, 40% );
+		a {
+			color: $black;
+			display: inline-block;
+			font-weight: $font-weight__bold;
+			height: 32px;
+			overflow: hidden;
+			position: relative;
+			text-indent: 150%;
+			text: {
+				decoration: none;
+				transform: uppercase;
+			}
+			white-space: nowrap;
+			width: 32px;
+
+			@include hover-state {
+				color: $red;
+
+				&::before {
+					background-color: $red;
+				}
+			}
+
+			@include breakpoint( $bp-medium ) {
+				text-indent: 0;
+				width: auto;
+			}
+
+			&::before {
+				background-color: $black;
+				border-radius: 100%;
+				color: $white;
+				display: block;
+				font: {
+					family: Genericons;
+					size: 24px;
+				}
+				height: 32px;
+				line-height: 32px;
+				position: absolute;
+				text: {
+					align: center;
+					indent: 0;
+				}
+				top: 0;
+				width: 32px;
+			}
+		}
+	}
+
+	.nav-previous a {
+
+		@include breakpoint( $bp-medium ) {
+			padding-left: 38px;
 		}
 
 		&::before {
-			color: $white;
-			display: block;
-			font: {
-				family: Genericons;
-				size: 24px;
-			}
-			height: 32px;
+			content: "\f430";
 			left: 0;
-			line-height: 32px;
-			position: absolute;
-			text: {
-				align: center;
-				indent: 0;
-			}
-			top: 0;
-			width: 32px;
 		}
 	}
 
 	.nav-next a {
-		float: right;
+
+		@include breakpoint( $bp-medium ) {
+			padding-right: 38px;
+		}
 
 		&::before {
 			content: "\f429";
+			right: 0;
 		}
-	}
-
-	.nav-previous a::before {
-		content: "\f430";
 	}
 }
