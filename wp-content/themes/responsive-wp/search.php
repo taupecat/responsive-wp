@@ -2,7 +2,9 @@
 /**
  * The template for displaying search results pages.
  *
- * @package Responsive WP
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
+ *
+ * @package Responsive_WP
  */
 
 get_header(); ?>
@@ -13,7 +15,7 @@ get_header(); ?>
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'responsive-wp' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+				<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'responsive-wp' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
@@ -25,16 +27,16 @@ get_header(); ?>
 				 * If you want to overload this in a child theme then include a file
 				 * called content-search.php and that will be used instead.
 				 */
-				get_template_part( 'content', 'search' );
+				get_template_part( 'template-parts/content', 'search' );
 				?>
 
 			<?php endwhile; ?>
 
-			<?php responsive_wp_paging_nav(); ?>
+			<?php the_posts_navigation(); ?>
 
 		<?php else : ?>
 
-			<?php get_template_part( 'content', 'none' ); ?>
+			<?php get_template_part( 'template-parts/content', 'none' ); ?>
 
 		<?php endif; ?>
 

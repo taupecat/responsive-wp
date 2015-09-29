@@ -2,10 +2,13 @@
 /**
  * The header for our theme.
  *
- * Displays all of the <head> section and everything up till <div id="content">
+ * This is the template that displays all of the <head> section and everything up until <div id="content">
  *
- * @package Responsive WP
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Responsive_WP
  */
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -19,21 +22,26 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
-	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'responsive-wp' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'responsive-wp' ); ?></a>
 
 	<header id="masthead" class="site-header" role="banner">
 
 		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="block">
 
-			<img src="http://placehold.it/320x160">
+			<div class="header__image">
 
-			<div class="site-logo">
-				<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/logo.png">
+				<picture>
+					<source srcset="http://placehold.it/1024x250, http://placehold.it/2048x500 2x" media="(min-width: 640px)">
+					<source srcset="http://placehold.it/640x209, http://placehold.it/1280x418 2x" media="(min-width: 321px)">
+					<source srcset="http://placehold.it/320x164, http://placehold.it/640x328 2x">
+					<img src="http://placehold.it/320x164" srcset="http://placehold.it/320x164, http://placehold.it/640x328 2x">
+				</picture>
+
 			</div>
 
 			<div class="site-branding">
 				<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
-				<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
+				<p class="site-description"><?php bloginfo( 'description' ); ?></p>
 			</div><!-- .site-branding -->
 
 		</a>
@@ -41,8 +49,8 @@
 	</header><!-- #masthead -->
 
 	<nav id="site-navigation" class="main-navigation" role="navigation">
-		<button class="menu-toggle" aria-controls="menu" aria-expanded="false"><?php _e( 'Primary Menu', 'responsive-wp' ); ?></button>
-		<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'responsive-wp' ); ?></button>
+		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
 	</nav><!-- #site-navigation -->
 
 	<div id="content" class="site-content">

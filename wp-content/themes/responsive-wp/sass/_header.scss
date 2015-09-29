@@ -1,9 +1,37 @@
 .site-header {
+	background-color: $color__background-body;
 	border-top: 4px solid $black;
-	position: relative;
+
+	a {
+		// @extend %page-shadow;
+		// margin: 0 auto;
+		// max-width: 1024px;
+		position: relative;
+	}
+}
+
+.header__image {
+	height: 160px;
+	overflow: hidden;
+	text-align: center;
+	width: 100%;
+
+	@include breakpoint( 321px ) {
+		height: 210px;
+	}
+
+	@include breakpoint( $bp-medium ) {
+		height: 225px;
+	}
 
 	img {
-		display: block;
+		display: inline;
+		height: 100%;
+		left: 100%;
+		margin-left: -200%;
+		max-width: none;
+		position: relative;
+		width: auto;
 	}
 }
 
@@ -19,6 +47,14 @@
 		height: auto;
 		width: 100%;
 	}
+
+	@include breakpoint( $bp-medium ) {
+		height: 124px;
+		left: 1rem;
+		top: 1rem;
+		transform: none;
+		width: 124px;
+	}
 }
 
 .site-branding {
@@ -30,6 +66,11 @@
 	position: absolute;
 	right: 0;
 	@include side-padding;
+
+	@include breakpoint( $bp-large ) {
+		height: 90px;
+		padding-top: rem( 22px );
+	}
 }
 
 .site-title {
@@ -39,6 +80,10 @@
 	}
 	line-height: ( 48px / 40px );
 	@include font-size(2);
+
+	@include breakpoint( $bp-large ) {
+		float: left;
+	}
 }
 
 .site-description {
@@ -47,4 +92,11 @@
 		style: italic;
 	}
 	line-height: ( 48px / 24px );
+	margin: 0;
+
+	@include breakpoint( $bp-large ) {
+		clear: none;
+		float: left;
+		margin-left: 3em;
+	}
 }

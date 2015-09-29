@@ -1,8 +1,8 @@
 <?php
 /**
- * Responsive WP Theme Customizer
+ * Responsive WP Theme Customizer.
  *
- * @package Responsive WP
+ * @package Responsive_WP
  */
 
 /**

@@ -4,62 +4,8 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package Responsive WP
+ * @package Responsive_WP
  */
-
-if ( ! function_exists( 'responsive_wp_paging_nav' ) ) :
-/**
- * Display navigation to next/previous set of posts when applicable.
- */
-function responsive_wp_paging_nav() {
-	// Don't print empty markup if there's only one page.
-	if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
-		return;
-	}
-	?>
-	<nav class="navigation paging-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php _e( 'Posts navigation', 'responsive-wp' ); ?></h1>
-		<div class="nav-links">
-
-			<?php if ( get_next_posts_link() ) : ?>
-			<div class="nav-previous"><?php next_posts_link( __( 'Older posts', 'responsive-wp' ) ); ?></div>
-			<?php endif; ?>
-
-			<?php if ( get_previous_posts_link() ) : ?>
-			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts', 'responsive-wp' ) ); ?></div>
-			<?php endif; ?>
-
-		</div><!-- .nav-links -->
-	</nav><!-- .navigation -->
-	<?php
-}
-endif;
-
-if ( ! function_exists( 'responsive_wp_post_nav' ) ) :
-/**
- * Display navigation to next/previous post when applicable.
- */
-function responsive_wp_post_nav() {
-	// Don't print empty markup if there's nowhere to navigate.
-	$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-	$next     = get_adjacent_post( false, '', false );
-
-	if ( ! $next && ! $previous ) {
-		return;
-	}
-	?>
-	<nav class="navigation post-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'responsive-wp' ); ?></h1>
-		<div class="nav-links">
-			<?php
-				previous_post_link( '<div class="nav-previous">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'responsive-wp' ) );
-				next_post_link(     '<div class="nav-next">%link</div>',     _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link',     'responsive-wp' ) );
-			?>
-		</div><!-- .nav-links -->
-	</nav><!-- .navigation -->
-	<?php
-}
-endif;
 
 if ( ! function_exists( 'responsive_wp_posted_on' ) ) :
 /**
@@ -79,16 +25,16 @@ function responsive_wp_posted_on() {
 	);
 
 	$posted_on = sprintf(
-		_x( 'Posted on %s', 'post date', 'responsive-wp' ),
+		esc_html_x( 'Posted on %s', 'post date', 'responsive-wp' ),
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
 
 	$byline = sprintf(
-		_x( 'by %s', 'post author', 'responsive-wp' ),
+		esc_html_x( 'by %s', 'post author', 'responsive-wp' ),
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
+	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
 
 }
 endif;
@@ -99,121 +45,35 @@ if ( ! function_exists( 'responsive_wp_entry_footer' ) ) :
  */
 function responsive_wp_entry_footer() {
 	// Hide category and tag text for pages.
-	if ( 'post' == get_post_type() ) {
+	if ( 'post' === get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( __( ', ', 'responsive-wp' ) );
+		$categories_list = get_the_category_list( esc_html__( ', ', 'responsive-wp' ) );
 		if ( $categories_list && responsive_wp_categorized_blog() ) {
-			printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'responsive-wp' ) . '</span>', $categories_list );
+			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'responsive-wp' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 		}
 
 		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', __( ', ', 'responsive-wp' ) );
+		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'responsive-wp' ) );
 		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'responsive-wp' ) . '</span>', $tags_list );
+			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'responsive-wp' ) . '</span>', $tags_list ); // WPCS: XSS OK.
 		}
 	}
 
 	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 		echo '<span class="comments-link">';
-		comments_popup_link( __( 'Leave a comment', 'responsive-wp' ), __( '1 Comment', 'responsive-wp' ), __( '% Comments', 'responsive-wp' ) );
+		comments_popup_link( esc_html__( 'Leave a comment', 'responsive-wp' ), esc_html__( '1 Comment', 'responsive-wp' ), esc_html__( '% Comments', 'responsive-wp' ) );
 		echo '</span>';
 	}
 
-	edit_post_link( __( 'Edit', 'responsive-wp' ), '<span class="edit-link">', '</span>' );
-}
-endif;
-
-if ( ! function_exists( 'the_archive_title' ) ) :
-/**
- * Shim for `the_archive_title()`.
- *
- * Display the archive title based on the queried object.
- *
- * @todo Remove this function when WordPress 4.3 is released.
- *
- * @param string $before Optional. Content to prepend to the title. Default empty.
- * @param string $after  Optional. Content to append to the title. Default empty.
- */
-function the_archive_title( $before = '', $after = '' ) {
-	if ( is_category() ) {
-		$title = sprintf( __( 'Category: %s', 'responsive-wp' ), single_cat_title( '', false ) );
-	} elseif ( is_tag() ) {
-		$title = sprintf( __( 'Tag: %s', 'responsive-wp' ), single_tag_title( '', false ) );
-	} elseif ( is_author() ) {
-		$title = sprintf( __( 'Author: %s', 'responsive-wp' ), '<span class="vcard">' . get_the_author() . '</span>' );
-	} elseif ( is_year() ) {
-		$title = sprintf( __( 'Year: %s', 'responsive-wp' ), get_the_date( _x( 'Y', 'yearly archives date format', 'responsive-wp' ) ) );
-	} elseif ( is_month() ) {
-		$title = sprintf( __( 'Month: %s', 'responsive-wp' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'responsive-wp' ) ) );
-	} elseif ( is_day() ) {
-		$title = sprintf( __( 'Day: %s', 'responsive-wp' ), get_the_date( _x( 'F j, Y', 'daily archives date format', 'responsive-wp' ) ) );
-	} elseif ( is_tax( 'post_format' ) ) {
-		if ( is_tax( 'post_format', 'post-format-aside' ) ) {
-			$title = _x( 'Asides', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
-			$title = _x( 'Galleries', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-image' ) ) {
-			$title = _x( 'Images', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-video' ) ) {
-			$title = _x( 'Videos', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-quote' ) ) {
-			$title = _x( 'Quotes', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-link' ) ) {
-			$title = _x( 'Links', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-status' ) ) {
-			$title = _x( 'Statuses', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-audio' ) ) {
-			$title = _x( 'Audio', 'post format archive title', 'responsive-wp' );
-		} elseif ( is_tax( 'post_format', 'post-format-chat' ) ) {
-			$title = _x( 'Chats', 'post format archive title', 'responsive-wp' );
-		}
-	} elseif ( is_post_type_archive() ) {
-		$title = sprintf( __( 'Archives: %s', 'responsive-wp' ), post_type_archive_title( '', false ) );
-	} elseif ( is_tax() ) {
-		$tax = get_taxonomy( get_queried_object()->taxonomy );
-		/* translators: 1: Taxonomy singular name, 2: Current taxonomy term */
-		$title = sprintf( __( '%1$s: %2$s', 'responsive-wp' ), $tax->labels->singular_name, single_term_title( '', false ) );
-	} else {
-		$title = __( 'Archives', 'responsive-wp' );
-	}
-
-	/**
-	 * Filter the archive title.
-	 *
-	 * @param string $title Archive title to be displayed.
-	 */
-	$title = apply_filters( 'get_the_archive_title', $title );
-
-	if ( ! empty( $title ) ) {
-		echo $before . $title . $after;
-	}
-}
-endif;
-
-if ( ! function_exists( 'the_archive_description' ) ) :
-/**
- * Shim for `the_archive_description()`.
- *
- * Display category, tag, or term description.
- *
- * @todo Remove this function when WordPress 4.3 is released.
- *
- * @param string $before Optional. Content to prepend to the description. Default empty.
- * @param string $after  Optional. Content to append to the description. Default empty.
- */
-function the_archive_description( $before = '', $after = '' ) {
-	$description = apply_filters( 'get_the_archive_description', term_description() );
-
-	if ( ! empty( $description ) ) {
-		/**
-		 * Filter the archive description.
-		 *
-		 * @see term_description()
-		 *
-		 * @param string $description Archive description to be displayed.
-		 */
-		echo $before . $description . $after;
-	}
+	edit_post_link(
+		sprintf(
+			/* translators: %s: Name of current post */
+			esc_html__( 'Edit %s', 'responsive-wp' ),
+			the_title( '<span class="screen-reader-text">"', '"</span>', false )
+		),
+		'<span class="edit-link">',
+		'</span>'
+	);
 }
 endif;
 

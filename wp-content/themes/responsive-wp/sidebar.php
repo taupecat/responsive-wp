@@ -2,7 +2,9 @@
 /**
  * The sidebar containing the main widget area.
  *
- * @package Responsive WP
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Responsive_WP
  */
 
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {

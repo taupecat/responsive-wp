@@ -1,5 +1,10 @@
 .main-navigation {
-	$gradient: linear-gradient( to bottom, transparentize( #fff, 0.77 ), transparentize( #000, 0.77 ) 35px, transparentize( #000, 0.77 ) 100% );
+	$gradient: linear-gradient(
+		to bottom,
+		transparentize( #fff, 0.77 ),
+		transparentize( #000, 0.77 ) 35px,
+		transparentize( #000, 0.77 ) 100%
+	);
 
 	background: {
 		color: $black;
@@ -7,10 +12,21 @@
 	}
 	clear: both;
 	display: block;
-	margin-bottom: 1.5em;
+	margin: 0 auto;
+	max-width: 960px;
 	width: 100%;
 
-	.nav-menu {
+	@include breakpoint( $bp-large ) {
+		border-radius: 10px;
+		height: 50px;
+		left: 50%;
+		line-height: 50px;
+		overflow: hidden;
+		position: absolute;
+		transform: translate( -50%, -50% );
+	}
+
+	.menu {
 		@extend %clearfix;
 		background-color: $black;
 		display: none;
@@ -25,7 +41,7 @@
 	}
 
 	&.toggled {
-		.nav-menu {
+		.menu {
 			display: block;
 		}
 	}
@@ -74,6 +90,7 @@
 			left: auto;
 		}
 	}
+
 	li {
 		position: relative;
 
@@ -83,18 +100,8 @@
 
 		&:hover > a {
 		}
-
-		@include breakpoint( $bp-medium ) {
-
-			&:first-child a {
-				padding-left: 0;
-			}
-
-			&:last-child a {
-				padding-right: 0;
-			}
-		}
 	}
+
 	a {
 		border-top: 1px solid transparentize( $white, 0.8 );
 		color: mix( #000, $white, 10% );
@@ -122,12 +129,19 @@
 				left: 0.5em;
 				right: 0.5em;
 			}
-		}
-	}
+			transition: background-color $hover-timing;
 
-	.current_page_item > a,
-	.current-menu-item > a,
-	.current_page_ancestor > a {
+			@include hover-state {
+				background-color: transparentize( $white, 0.8 );
+			}
+		}
+
+		@include breakpoint( $bp-large ) {
+			padding: {
+				top: 0;
+				bottom: 0;
+			}
+		}
 	}
 }
 

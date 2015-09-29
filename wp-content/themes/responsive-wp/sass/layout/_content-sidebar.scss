@@ -1,14 +1,30 @@
-@include breakpoint( $bp-medium ) {
+.hfeed.site {
+	box-shadow:
+		-5px 0 5px transparentize( $black, 0.67 ),
+		5px 0 5px transparentize( $black, 0.67 );
+	margin: 0 auto;
+	max-width: 1024px;
+}
 
-	.site-content {
+.site-content {
+	background-color: $white;
+
+	@include breakpoint( $bp-medium ) {
+		display: flex;
+		justify-content: space-between;
+		padding-top: 1.5em;
 		@include side-padding;
 
 		.content-area {
-			@include span(8);
+			width: span(8);
 		}
 
 		.widget-area {
-			@include span(4 last);
+			width: span(4);
 		}
+	}
+
+	@include breakpoint( $bp-large ) {
+		padding-top: rem(50px);
 	}
 }
